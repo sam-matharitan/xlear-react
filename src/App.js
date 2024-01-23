@@ -16,10 +16,8 @@ function Board({ isSetup, numberOfRows, numberOfColumns, squares, onPlace, onSel
     const nextSquares = squares.map((arr, i) => arr.slice().map((e,i2) => Math.abs(e)));
     
     if (isSetup) {
-      nextSquares[row][col] = (nextSquares[row][col] + 1) % 3;
-      onPlace(nextSquares);
+      onPlace(row, col, nextSquares);
     } else {
-      nextSquares[row][col] *= -1;
       onSelect(row, col, nextSquares);
     }
   }
@@ -73,14 +71,18 @@ export default function Game() {
     setIsSetup(!isSetup);
   }
 
-  function handlePlace(nextSquares) {
+  function handlePlace(row, col, nextSquares) {
+    nextSquares[row][col] = (nextSquares[row][col] + 1) % 3;
     setCurrentSquares(nextSquares);
   }
 
   function handleSelect(row, col, nextSquares) {
-    setSelectedRow(row);
-    setSelectedCol(col);
-    setCurrentSquares(nextSquares);
+    if (!hasWon) {
+      nextSquares[row][col] *= -1;
+      setSelectedRow(row);
+      setSelectedCol(col);
+      setCurrentSquares(nextSquares);
+    }
   }
 
   function handleOnKeyDown(event) {

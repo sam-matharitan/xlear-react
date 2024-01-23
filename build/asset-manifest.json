@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/xlear-react/static/css/main.0046635c.css",
-    "main.js": "/xlear-react/static/js/main.690d76f5.js",
+    "main.css": "/xlear-react/static/css/main.8161dfce.css",
+    "main.js": "/xlear-react/static/js/main.173ead49.js",
     "static/js/787.d5fa4d18.chunk.js": "/xlear-react/static/js/787.d5fa4d18.chunk.js",
     "index.html": "/xlear-react/index.html",
-    "main.0046635c.css.map": "/xlear-react/static/css/main.0046635c.css.map",
-    "main.690d76f5.js.map": "/xlear-react/static/js/main.690d76f5.js.map",
+    "main.8161dfce.css.map": "/xlear-react/static/css/main.8161dfce.css.map",
+    "main.173ead49.js.map": "/xlear-react/static/js/main.173ead49.js.map",
     "787.d5fa4d18.chunk.js.map": "/xlear-react/static/js/787.d5fa4d18.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0046635c.css",
-    "static/js/main.690d76f5.js"
+    "static/css/main.8161dfce.css",
+    "static/js/main.173ead49.js"
   ]
 }
