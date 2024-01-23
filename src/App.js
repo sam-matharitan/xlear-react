@@ -375,7 +375,6 @@ export default function Game() {
       </div>
       <footer className="App-footer">
         <div className={"App-settings" + (hasWon ? "" : "-hidden")}><label className="engraved app-setting-label">You Won!</label></div>
-        <div className={"App-settings" + (hasWon ? "" : "-hidden")}><label className="engraved app-setting-label">Press (N) to Play Again!</label></div>
         <div className="App-settings"><div className="reset" onClick={handleResetClick}><label className="reset-engraved app-setting-label">Reset</label></div></div>
       </footer>
     </div>
