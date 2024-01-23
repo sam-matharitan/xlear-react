@@ -389,6 +389,7 @@ export default function Game() {
       if (!isPlacement) {
         if (blueCt === 0) {
           setHasWon(true);
+          setIsPlayEnabled(false);
           for (let i = 0; i < numberOfRows; i++) {
             for (let j = 0; j < numberOfColumns; j++) {
               if (nextSquares[i][j] === 0) {
