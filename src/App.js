@@ -392,9 +392,54 @@ export default function Game() {
           <div className="App-setting"><div className="App-setting-button-play" onClick={handleSetupModeChanged}><label className="App-setting-button-label app-setting-label">{playLabel}</label></div></div>
           <div className="App-setting"><div className="App-setting-button" onClick={handleResetClick}><label className="App-setting-button-label app-setting-label">Reset</label></div></div>
         </div>
+        <span className = "engraved app-setting-title">Memory Settings</span>
+        <div className="App-settings-buttons">
+          <div className="App-setting"><div className="App-setting-button-store" onClick={handleSetupModeChanged}><label className="App-setting-button-label app-setting-label">Store</label></div></div>
+          <div className="App-setting"><div className="App-setting-button-recall" onClick={handleResetClick}><label className="App-setting-button-label app-setting-label">Recall</label></div></div>
+          <div className="App-setting"><div className="App-setting-button-clear" onClick={handleResetClick}><label className="App-setting-button-label app-setting-label">Clear</label></div></div>
+        </div>
+        <span className = "engraved app-setting-title">Other Settings</span>
         <div className="App-settings-buttons">
           <div className="App-setting"><div className="App-setting-button-rotate" onClick={handleRotateEarthChanged}><label className="App-setting-button-label app-setting-label">{rotateLabel}</label></div></div>
         </div>
+        <span className = "engraved app-setting-title">The Rules</span>
+        <span className = "app-setting-subtitle">Storm Clouds (Saturation)</span>
+        <div className="App-settings-buttons">
+          <div className="sq1-rules"></div>
+        </div>
+        <span className="app-setting-desc">Storm Clouds must have at least 2 adjacent neighbors at all times, composed of Storm Clouds and/or Rain.</span>
+        <span className = "app-setting-subtitle">Rain (Precipitation)</span>
+        <div className="App-settings-buttons">
+          <div className="sq2-rules"></div>
+        </div>
+        <span className="app-setting-desc">Rain falls (disappears) if it has less than 2 adjacent neighbors, unless disappearing would invalidate the Saturation rule.</span>
+        <span className = "engraved app-setting-title">How to Edit</span>
+        <span className = "app-setting-subtitle">Order of Placement</span>
+        <div className="App-settings-buttons">
+          <div className="sq0-rules"></div>
+          <div className="sq1-rules"></div>
+          <div className="sq2-rules"></div>
+          <div className="sq0-rules"></div>
+        </div>
+        <span className="app-setting-desc">During Edit mode, selecting one of the above types of items in the 'Order of Placement' arrangement will turn it into the item to the right of it in the order.</span>
+        <span className = "engraved app-setting-title">How to Move</span>
+        <div className="App-settings-buttons">
+          <div className="sq-1-rules"></div>
+          <div className="sq-2-rules"></div>
+        </div>
+        <span className="app-setting-desc">During Play mode, selecting a Storm Cloud or a Rain will highlight it as above, signifying it being selected.</span>
+        <div className="App-settings-buttons">
+          <div className="control-up-rules"></div>
+          <div className="control-right-rules"></div>
+          <div className="control-down-rules"></div>
+          <div className="control-left-rules"></div>
+        </div>
+        <span className="app-setting-desc">Once selected, pressing one of the above Wind Gusts will move an entire row or column in the direction towards the selected Wind Gust, unless a Storm Cloud or a Rain would be moved off the grid.</span>
+        <span className = "engraved app-setting-title">How to Win</span>
+        <div className="App-settings-buttons">
+          <div className="sq4-rules"></div>
+        </div>
+        <span className="app-setting-desc">The game is won if all the Rain falls (disappears). Upon winning, the Storm Clouds turn into the Wind (above).</span>
       </footer>
     </div>
   );

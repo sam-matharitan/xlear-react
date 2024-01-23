@@ -34,6 +34,10 @@ div {
   .sq4 {
     animation: shimmer 1.5s infinite linear;
   }
+
+  .sq4-rules {
+    animation: shimmer 1.5s infinite linear;
+  }
 }
 /*aaeeff*/
 .App-header {
@@ -174,6 +178,7 @@ div {
   font-size: calc(10px + 2vmin);
   color: white;
   margin-bottom: 8vh;
+  margin-top: 5vh;
 }
 
 @keyframes game-border-spin {
@@ -357,10 +362,36 @@ ul {
   width: 70%;
 }
 
-.App-settings-buttons {
+.app-setting-title {
   margin-top: 5vh;
+  margin-left: 5vh;
+  margin-right: 5vh;
+  font-size: 10vw;
+}
+
+.app-setting-subtitle {
+  font-family: Future;
+  margin-top: 3vh;
+  margin-left: 5vh;
+  margin-right: 5vh;
+  font-size: 7vw;
+}
+
+.app-setting-desc {
+  color: #ddd;
+  font-family: Future;
+  margin-top: 3vh;
+  margin-left: 5vh;
+  margin-right: 5vh;
+  font-size: 6vw;
+}
+
+.App-settings-buttons {
+  margin-top: 2vh;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-settings-buttons .App-setting {
@@ -402,6 +433,7 @@ ul {
   background: radial-gradient(ellipse at 35% 30%, #0cf 0%, #0033dddd 70%);
   padding: 10px;
   box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
 }
 
 .App-setting-button-play {
@@ -409,13 +441,39 @@ ul {
   background: radial-gradient(ellipse at 35% 30%, white 0%, #223011 90%);
   padding: 10px;
   box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
+}
+
+.App-setting-button-store {
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #0a5f3e 90%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
+}
+
+.App-setting-button-recall {
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #d8700f 90%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
+}
+
+.App-setting-button-clear {
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #ff0707 90%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
 }
 
 .App-setting-button-rotate {
-  border-radius: 10%;
+  border-radius: 1vw;
   padding: 10px;
   box-shadow: 10px 10px 10px #000;
-  background: radial-gradient(ellipse at 35% 30%, white 0%, brown 90%);
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #aaa 90%);
+  cursor: pointer;
 }
 
 .engraved {
@@ -435,4 +493,114 @@ ul {
   -moz-background-clip: text;
   background-clip: text;
   color: black;
+  cursor: pointer;
+}
+
+.rule-desc {
+  font-family: Future;
+}
+
+.sq0-rules {
+  margin-right: 2vh;
+  vertical-align: middle;
+  border-radius: 30% 10% 20% 60% / 80% 20% 30% 20%;;
+  border-color: #aaa;
+  background: radial-gradient(ellipse at 35% 30%, #ddaa00 0%, #aa6600 70%);
+  box-shadow: 0px 30px 30px #111d;
+  height: 5vh;
+  aspect-ratio: 1 / 1;
+}
+
+.sq1-rules {
+  margin-right: 2vh;
+  border-radius: 80% 20% 30% 20% / 30% 10% 20% 60%;
+  border-style: solid;
+  border-color: #222b;
+  background: radial-gradient(ellipse at 35% 30%, #aaa 0%, #111d 70%);
+  box-shadow: 0px 30px 30px  #111d;
+  width: 10vh;
+  aspect-ratio: 1 / 1;
+}
+
+.sq2-rules {
+  margin-right: 2vh;
+  border-radius: 30% 10% 20% 60% / 80% 20% 30% 20%;
+  border-style: solid;
+  border-color: #0044eebb;
+  background: radial-gradient(ellipse at 35% 30%, #0cf 0%, #0033dddd 70%);
+  box-shadow: 0px 30px 30px #03dd;
+  width: 10vh;
+  aspect-ratio: 1 / 1;
+}
+
+.sq-1-rules {
+  margin-right: 2vh;
+  border-radius: 80% 20% 30% 20% / 30% 10% 20% 60%;
+  border-style: solid;
+  border-color: white;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #111d 70%);
+  box-shadow: 0px 30px 30px  #111d;
+  width: 10vh;
+  aspect-ratio: 1 / 1;
+}
+
+.sq-2-rules {
+  margin-right: 2vh;
+  border-radius: 30% 10% 20% 60% / 80% 20% 30% 20%;
+  border-style: solid;
+  border-color: white;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #0033dddd 70%);
+  box-shadow: 0px 30px 30px #03dd;
+  width: 10vh;
+  aspect-ratio: 1 / 1;
+}
+
+.sq4-rules {
+  margin-right: 2vh;
+  width: 10vh;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: #fffa;
+  background: linear-gradient(135deg, transparent 30%, #fafafa 50%, transparent 30%);
+  background-size: 300%;
+  box-shadow: 0px 30px 30px #dddd;
+}
+
+.control-up-rules {
+  margin-right: 2vh;
+  border-radius: 100% 100% 35% 35% / 100%;
+  width: 8vh;
+  background: radial-gradient(ellipse at 50% 30%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+}
+
+.control-down-rules {
+  margin-right: 2vh;
+  border-radius: 100% 100% 35% 35% / 100%;
+  width: 8vh;
+  background: radial-gradient(ellipse at 50% 30%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  transform: rotate(180deg);
+}
+
+.control-left-rules {
+  margin-right: 2vh;
+  border-radius: 100% 35% 35% 100% / 100%;
+  width: 8vh;
+  background: radial-gradient(ellipse at 30% 50%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+}
+
+.control-right-rules {
+  margin-right: 2vh;
+  border-radius: 100% 35% 35% 100% / 100%;
+  width: 8vh;
+  background: radial-gradient(ellipse at 30% 50%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  transform: rotate(180deg);
 }
