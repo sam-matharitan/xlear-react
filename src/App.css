@@ -35,6 +35,16 @@ div {
     animation-direction: alternate;
   }
 
+  .sq-1-rules {
+    animation: sq2-spin infinite .6s linear;
+    animation-direction: alternate-reverse;
+  }
+
+  .sq-2-rules {
+    animation: sq2-spin infinite .6s linear;
+    animation-direction: alternate;
+  }
+
   .sq4 {
     animation: shimmer 1.5s infinite linear;
   }
