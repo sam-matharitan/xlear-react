@@ -151,6 +151,13 @@ export default function Game() {
     }
   }
 
+  function handleResetClick() {
+    const nextSquares = Array(numberOfRows).fill(Array(numberOfColumns).fill(0));
+    setCurrentSquares(nextSquares);
+    setIsSetup(true);
+    setHasWon(false);
+  }
+
   function handleControlDownClick() {
     if (!hasWon && !isSetup) {
       const nextSquares = currentSquares.map((arr, i) => arr.slice().map((e,i2) => e));
@@ -369,7 +376,7 @@ export default function Game() {
       <footer className="App-footer">
         <div className={"App-settings" + (hasWon ? "" : "-hidden")}><label className="engraved app-setting-label">You Won!</label></div>
         <div className={"App-settings" + (hasWon ? "" : "-hidden")}><label className="engraved app-setting-label">Press (N) to Play Again!</label></div>
-        <div className="App-settings"><div className="reset"><label className="reset-engraved app-setting-label">Reset</label></div></div>
+        <div className="App-settings"><div className="reset" onClick={handleResetClick}><label className="reset-engraved app-setting-label">Reset</label></div></div>
       </footer>
     </div>
   );
