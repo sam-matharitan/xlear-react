@@ -50,12 +50,24 @@ export default function Game() {
   const [selectedRow, setSelectedRow] = useState(null);
   const [selectedCol, setSelectedCol] = useState(null);
   const [hasWon, setHasWon] = useState(false);
+  const [rotateLabel, setRotateLabel] = useState("Stop Rotating Land");
+  const [playLabel, setPlayLabel] = useState("Play");
 
   function handleRotateEarthChanged() {
+    if (!isBackgroundRotatingOn) {
+      setRotateLabel("Stop Rotating Land");
+    } else {
+      setRotateLabel("Rotate Land");
+    }
     setIsBackgroundRotatingOn(!isBackgroundRotatingOn);
   }
 
   function handleSetupModeChanged() {
+    if (!isSetup) {
+      setPlayLabel("Play");
+    } else {
+      setPlayLabel("Edit");
+    }
     const nextSquares = currentSquares.map((arr, i) => arr.slice().map((e,i2) => Math.abs(e)));
     setCurrentSquares(nextSquares);
     setIsSetup(!isSetup);
@@ -154,6 +166,7 @@ export default function Game() {
   function handleResetClick() {
     const nextSquares = Array(numberOfRows).fill(Array(numberOfColumns).fill(0));
     setCurrentSquares(nextSquares);
+    setPlayLabel("Play");
     setIsSetup(true);
     setHasWon(false);
   }
@@ -327,8 +340,6 @@ export default function Game() {
     <div className="App" onKeyDown={handleOnKeyDown}>
       <header className="App-header">
         <div className="App-logo"><span className = "engraved app-title">XLEAR</span></div>
-        <div className="App-settings"><label className="engraved app-setting-label">Setup Mode:</label><input className="app-setting-checkbox" type="checkbox" onChange={handleSetupModeChanged} checked={isSetup}></input></div>
-        <div className="App-settings"><label className="engraved app-setting-label">Rotate Earth:</label><input className="app-setting-checkbox" type="checkbox" onChange={handleRotateEarthChanged} checked={isBackgroundRotatingOn}></input></div>
       </header>
       <div className="game" tabIndex="0">
         <div className="ocean-border">
@@ -374,8 +385,14 @@ export default function Game() {
         </div>
       </div>
       <footer className="App-footer">
-        <div className={"App-settings" + (hasWon ? "" : "-hidden")}><label className="engraved app-setting-label">You Won!</label></div>
-        <div className="App-settings"><div className="reset" onClick={handleResetClick}><label className="reset-engraved app-setting-label">Reset</label></div></div>
+        <div className={"App-setting" + (hasWon ? "" : "-hidden")}><label className="engraved app-setting-label">You Won!</label></div>
+        <div className="App-settings-buttons">
+          <div className="App-setting"><div className="App-setting-button-play" onClick={handleSetupModeChanged}><label className="App-setting-button-label app-setting-label">{playLabel}</label></div></div>
+          <div className="App-setting"><div className="App-setting-button" onClick={handleResetClick}><label className="App-setting-button-label app-setting-label">Reset</label></div></div>
+        </div>
+        <div className="App-settings-buttons">
+          <div className="App-setting"><div className="App-setting-button-rotate" onClick={handleRotateEarthChanged}><label className="App-setting-button-label app-setting-label">{rotateLabel}</label></div></div>
+        </div>
       </footer>
     </div>
   );
