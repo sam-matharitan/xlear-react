@@ -50,6 +50,7 @@ export default function Game() {
   const [hasWon, setHasWon] = useState(false);
   const [rotateLabel, setRotateLabel] = useState("Stop Rotating Land");
   const [playLabel, setPlayLabel] = useState("Play");
+  const [storedSquares, setStoredSquares] = useState(null);
 
   function handleRotateEarthChanged() {
     if (!isBackgroundRotatingOn) {
@@ -171,6 +172,27 @@ export default function Game() {
     setPlayLabel("Play");
     setIsSetup(true);
     setHasWon(false);
+  }
+
+  function handleStoreClick() {
+    const temp = currentSquares.map((arr, i) => arr.slice().map((e,i2) => e));
+    setStoredSquares(temp);
+  }
+
+  function handleRecallClick() {
+    if (storedSquares) {
+      const temp = storedSquares.map((arr, i) => arr.slice().map((e,i2) => isSetup ? Math.abs(e) : e));
+      setCurrentSquares(temp);
+      setSelectedRow(selectedRow);
+      setSelectedCol(selectedCol);
+      if (hasWon) {
+        setHasWon(!hasWon);
+      }
+    }
+  }
+
+  function handleClearClick() {
+    setStoredSquares(null);
   }
 
   function handleControlDownClick() {
@@ -387,16 +409,15 @@ export default function Game() {
         </div>
       </div>
       <footer className="App-footer">
-        <div className={"App-setting" + (hasWon ? "" : "-hidden")}><label className="engraved app-setting-label">You Won!</label></div>
         <div className="App-settings-buttons">
           <div className="App-setting"><div className="App-setting-button-play" onClick={handleSetupModeChanged}><label className="App-setting-button-label app-setting-label">{playLabel}</label></div></div>
           <div className="App-setting"><div className="App-setting-button" onClick={handleResetClick}><label className="App-setting-button-label app-setting-label">Reset</label></div></div>
         </div>
         <span className = "engraved app-setting-title">Memory Settings</span>
         <div className="App-settings-buttons">
-          <div className="App-setting"><div className="App-setting-button-store" onClick={handleSetupModeChanged}><label className="App-setting-button-label app-setting-label">Store</label></div></div>
-          <div className="App-setting"><div className="App-setting-button-recall" onClick={handleResetClick}><label className="App-setting-button-label app-setting-label">Recall</label></div></div>
-          <div className="App-setting"><div className="App-setting-button-clear" onClick={handleResetClick}><label className="App-setting-button-label app-setting-label">Clear</label></div></div>
+          <div className="App-setting"><div className="App-setting-button-store" onClick={handleStoreClick}><label className="App-setting-button-label app-setting-label">Store</label></div></div>
+          <div className="App-setting"><div className="App-setting-button-recall" onClick={handleRecallClick}><label className="App-setting-button-label app-setting-label">Recall</label></div></div>
+          <div className="App-setting"><div className="App-setting-button-clear" onClick={handleClearClick}><label className="App-setting-button-label app-setting-label">Clear</label></div></div>
         </div>
         <span className = "engraved app-setting-title">Other Settings</span>
         <div className="App-settings-buttons">
