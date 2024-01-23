@@ -460,6 +460,17 @@ ul {
   cursor: pointer;
 }
 
+.App-setting-button-play-disabled {
+  filter: blur(0.5vh);
+  pointer-events: none;
+  color: #888;
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #ccc 90%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
+}
+
 .App-setting-button-store {
   border-radius: 10%;
   background: radial-gradient(ellipse at 35% 30%, white 0%, #0a5f3e 90%);

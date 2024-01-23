@@ -43,13 +43,20 @@ export default function Game() {
   const [isBackgroundRotatingOn, setIsBackgroundRotatingOn] = useState(true);
   const [numberOfRows, setNumberOfRows] = useState(7);
   const [numberOfColumns, setNumberOfColumns] = useState(7);
-  const [isSetup, setIsSetup] = useState(true);
-  const [currentSquares, setCurrentSquares] = useState(Array(numberOfRows).fill(Array(numberOfColumns).fill(0)));
+  const [isSetup, setIsSetup] = useState(false);
+  const [isPlayEnabled, setIsPlayEnabled] = useState(true);
+  const [currentSquares, setCurrentSquares] = useState([[0,0,0,0,0,0,0]
+                                                       ,[0,0,0,0,0,0,0]
+                                                       ,[0,0,2,1,2,0,0]
+                                                       ,[0,0,1,-2,1,0,0]
+                                                       ,[0,0,2,1,2,0,0]
+                                                       ,[0,0,0,0,0,0,0]
+                                                       ,[0,0,0,0,0,0,0]]);
   const [selectedRow, setSelectedRow] = useState(null);
   const [selectedCol, setSelectedCol] = useState(null);
   const [hasWon, setHasWon] = useState(false);
   const [rotateLabel, setRotateLabel] = useState("Stop Rotating Land");
-  const [playLabel, setPlayLabel] = useState("Play");
+  const [playLabel, setPlayLabel] = useState("Edit");
   const [storedSquares, setStoredSquares] = useState(null);
 
   function handleRotateEarthChanged() {
@@ -62,19 +69,28 @@ export default function Game() {
   }
 
   function handleSetupModeChanged() {
+    const nextSquares = currentSquares.map((arr, i) => arr.slice().map((e,i2) => Math.abs(e)));
     if (!isSetup) {
       setPlayLabel("Play");
-    } else {
+    } else if (isPlayEnabled && updateIfValid(selectedRow, selectedCol, nextSquares, true)) {
       setPlayLabel("Edit");
+      setCurrentSquares(nextSquares);
+      setIsSetup(!isSetup);
+    } else {
+      setIsSetup(true);
+      setIsPlayEnabled(false);
     }
-    const nextSquares = currentSquares.map((arr, i) => arr.slice().map((e,i2) => Math.abs(e)));
-    setCurrentSquares(nextSquares);
-    setIsSetup(!isSetup);
   }
 
   function handlePlace(row, col, nextSquares) {
     nextSquares[row][col] = (nextSquares[row][col] + 1) % 3;
     setCurrentSquares(nextSquares);
+
+    if (updateIfValid(selectedRow, selectedCol, nextSquares, true, true)) {
+      setIsPlayEnabled(true);
+    } else {
+      setIsPlayEnabled(false);
+    }
   }
 
   function handleSelect(row, col, nextSquares) {
@@ -161,6 +177,8 @@ export default function Game() {
     if (c === 'N') {
       const nextSquares = Array(numberOfRows).fill(Array(numberOfColumns).fill(0));
       setCurrentSquares(nextSquares);
+      setIsPlayEnabled(false);
+      setPlayLabel("Play");
       setIsSetup(true);
       setHasWon(false);
     }
@@ -169,6 +187,7 @@ export default function Game() {
   function handleResetClick() {
     const nextSquares = Array(numberOfRows).fill(Array(numberOfColumns).fill(0));
     setCurrentSquares(nextSquares);
+    setIsPlayEnabled(false);
     setPlayLabel("Play");
     setIsSetup(true);
     setHasWon(false);
@@ -187,6 +206,16 @@ export default function Game() {
       setSelectedCol(selectedCol);
       if (hasWon) {
         setHasWon(!hasWon);
+      }
+      if (isSetup) {
+        if (updateIfValid(selectedRow, selectedCol, temp, true, true)) {
+          setIsPlayEnabled(true);
+        } else {
+          setIsPlayEnabled(false);
+        }
+      } else if (!updateIfValid(selectedRow, selectedCol, temp, true, true)) {
+        setIsPlayEnabled(false);
+        setIsSetup(true);
       }
     }
   }
@@ -247,7 +276,7 @@ export default function Game() {
     }
   }
 
-  function updateIfValid(row, col, nextSquares) {
+  function updateIfValid(row, col, nextSquares, checkStart, isPlacement) {
 
     // neighbors are only counted if adjacent (no corner neighbors counted)
     // '2' squares disappear if less than 2 neighbors unless it causes a '1' square to have less than two neighbors
@@ -289,75 +318,99 @@ export default function Game() {
       }
     }
 
-    let same = true;
-    do {
-      same = true;
-      for (let i = 0; i < numberOfRows; i++) {
-        for (let j = 0; j < numberOfColumns; j++) {
-          if (nextSquares[i][j] !== 0) {
-            if (Math.abs(nextSquares[i][j]) === 1) {
-              if (neighborCounts[i][j] < 2) {
-                isValid = false;
-              }
-            } else if (Math.abs(nextSquares[i][j]) === 2 && neighborCounts[i][j] >= -1) {
-              let canDisappear = true;
-
-              if (i - 1 >= 0 && neighborCounts[i-1][j] === 2) {
-                canDisappear = false;
-              }
-              if (i + 1 < numberOfRows && neighborCounts[i+1][j] === 2) {
-                canDisappear = false;
-              }
-              if (j - 1 >= 0 && neighborCounts[i][j-1] === 2) {
-                canDisappear = false;
-              }
-              if (j + 1 < numberOfColumns && neighborCounts[i][j+1] === 2) {
-                canDisappear = false;
-              }
-
-              if (canDisappear) {
-                nextSquares[i][j] = 0;
-                blueCt--;
-                neighborCounts[i][j] = 0;
-                if (i - 1 >= 0 && neighborCounts[i-1][j] !== 0) {
-                  neighborCounts[i-1][j] = Math.sign(neighborCounts[i-1][j])*(Math.abs(neighborCounts[i-1][j]) - 1);
-                }
-                if (i + 1 < numberOfRows && neighborCounts[i+1][j] !== 0) {
-                  neighborCounts[i+1][j] = Math.sign(neighborCounts[i+1][j])*(Math.abs(neighborCounts[i+1][j]) - 1);
-                }
-                if (j - 1 >= 0 && neighborCounts[i][j-1] !== 0) {
-                  neighborCounts[i][j-1] = Math.sign(neighborCounts[i][j-1])*(Math.abs(neighborCounts[i][j-1]) - 1);
-                }
-                if (j + 1 < numberOfColumns && neighborCounts[i][j+1] !== 0) {
-                  neighborCounts[i][j+1] = Math.sign(neighborCounts[i][j+1])*(Math.abs(neighborCounts[i][j+1]) - 1);
-                }
-                same = false;
-              }
-            }
-          }
-        }
-      }
-    } while(!same);
-
-    if (isValid) {
-
-      if (blueCt === 0) {
-        setHasWon(true);
+    if (!isPlacement) {
+      let same = true;
+      do {
+        same = true;
         for (let i = 0; i < numberOfRows; i++) {
           for (let j = 0; j < numberOfColumns; j++) {
-            if (nextSquares[i][j] === 0) {
-              nextSquares[i][j] = 3;
-            } else {
-              nextSquares[i][j] = 4;
+            if (nextSquares[i][j] !== 0) {
+              if (Math.abs(nextSquares[i][j]) === 1) {
+                if (neighborCounts[i][j] < 2) {
+                  isValid = false;
+                }
+              } else if (Math.abs(nextSquares[i][j]) === 2 && neighborCounts[i][j] >= -1) {
+                let canDisappear = true;
+
+                if (i - 1 >= 0 && neighborCounts[i-1][j] === 2) {
+                  canDisappear = false;
+                }
+                if (i + 1 < numberOfRows && neighborCounts[i+1][j] === 2) {
+                  canDisappear = false;
+                }
+                if (j - 1 >= 0 && neighborCounts[i][j-1] === 2) {
+                  canDisappear = false;
+                }
+                if (j + 1 < numberOfColumns && neighborCounts[i][j+1] === 2) {
+                  canDisappear = false;
+                }
+
+                if (canDisappear) {
+                  nextSquares[i][j] = 0;
+                  blueCt--;
+                  neighborCounts[i][j] = 0;
+                  if (i - 1 >= 0 && neighborCounts[i-1][j] !== 0) {
+                    neighborCounts[i-1][j] = Math.sign(neighborCounts[i-1][j])*(Math.abs(neighborCounts[i-1][j]) - 1);
+                  }
+                  if (i + 1 < numberOfRows && neighborCounts[i+1][j] !== 0) {
+                    neighborCounts[i+1][j] = Math.sign(neighborCounts[i+1][j])*(Math.abs(neighborCounts[i+1][j]) - 1);
+                  }
+                  if (j - 1 >= 0 && neighborCounts[i][j-1] !== 0) {
+                    neighborCounts[i][j-1] = Math.sign(neighborCounts[i][j-1])*(Math.abs(neighborCounts[i][j-1]) - 1);
+                  }
+                  if (j + 1 < numberOfColumns && neighborCounts[i][j+1] !== 0) {
+                    neighborCounts[i][j+1] = Math.sign(neighborCounts[i][j+1])*(Math.abs(neighborCounts[i][j+1]) - 1);
+                  }
+                  same = false;
+                }
+              }
+            }
+          }
+        }
+      } while(!same);
+    } else {
+      let anyThere = false;
+      for (let i = 0; i < numberOfRows; i++) {
+        for (let j = 0; j < numberOfColumns; j++) {
+          if (Math.abs(nextSquares[i][j]) === 1) {
+            anyThere = true;
+            if (neighborCounts[i][j] < 2) {
+              isValid = false;
             }
           }
         }
       }
-
-      setSelectedRow(row);
-      setSelectedCol(col);
-      setCurrentSquares(nextSquares);
+      if (!anyThere) {
+        isValid = false;
+      }
     }
+
+    if (isValid) {
+      if (!isPlacement) {
+        if (blueCt === 0) {
+          setHasWon(true);
+          for (let i = 0; i < numberOfRows; i++) {
+            for (let j = 0; j < numberOfColumns; j++) {
+              if (nextSquares[i][j] === 0) {
+                nextSquares[i][j] = 3;
+              } else {
+                nextSquares[i][j] = 4;
+              }
+            }
+          }
+        }
+
+        if (!checkStart) {
+          setSelectedRow(row);
+          setSelectedCol(col);
+          setCurrentSquares(nextSquares);
+        }
+      }
+
+      return true;
+    }
+
+    return false;
   }
 
   return (
@@ -410,8 +463,8 @@ export default function Game() {
       </div>
       <footer className="App-footer">
         <div className="App-settings-buttons">
-          <div className="App-setting"><div className="App-setting-button-play" onClick={handleSetupModeChanged}><label className="App-setting-button-label app-setting-label">{playLabel}</label></div></div>
-          <div className="App-setting"><div className="App-setting-button" onClick={handleResetClick}><label className="App-setting-button-label app-setting-label">Reset</label></div></div>
+          <div className="App-setting"><div className={"App-setting-button-play" + (isPlayEnabled ? "" : "-disabled")} onClick={handleSetupModeChanged}><label className="App-setting-button-label app-setting-label">{playLabel}</label></div></div>
+          <div className="App-setting"><div className="App-setting-button" onClick={handleResetClick}><label className="App-setting-button-label app-setting-label">Empty</label></div></div>
         </div>
         <span className = "engraved app-setting-title">Memory Settings</span>
         <div className="App-settings-buttons">
