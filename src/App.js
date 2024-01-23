@@ -440,6 +440,7 @@ export default function Game() {
           <div className="sq4-rules"></div>
         </div>
         <span className="app-setting-desc">The game is won if all the Rain falls (disappears). Upon winning, the Storm Clouds turn into the Wind (above).</span>
+        <span className="copyright">© 2024, The Matharitan Group, LLC</span>
       </footer>
     </div>
   );
