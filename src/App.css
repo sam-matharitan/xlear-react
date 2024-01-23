@@ -5,6 +5,7 @@ div {
 .copyright {
   margin-top: 10vh;
   font-size: 2vh;
+  width: 100%;
 }
 
 .App {
