@@ -58,6 +58,17 @@ div {
   aspect-ratio: 1 / 1;
 }
 
+.ocean-border {
+  border-radius: 40% 20% 10% 80% / 30% 80% 20% 20%;
+  position: absolute;
+  width: 90%;
+  display: flex;
+  background: radial-gradient(ellipse at 35% 30%, #0cf 0%, #0033dddd 70%);
+  filter: blur(100px);
+  flex-direction: column;
+  aspect-ratio: 1 / 1;
+}
+
 .game-border {
   position: relative;
   width: 70%;
@@ -74,6 +85,75 @@ div {
   background: radial-gradient(ellipse at 35% 30%, white 0%, brown 90%);
   border-radius: 40% 20% 10% 80% / 30% 80% 20% 20%;
   box-shadow: 0px 60px 60px rgba(0,0,0,.8);
+}
+
+.controls {
+  position: absolute;
+  width: 90%;
+  display: flex;
+  background: transparent;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+}
+
+.control-up {
+  border-radius: 100% 100% 35% 35% / 100%;
+  width: 8%;
+  background: radial-gradient(ellipse at 50% 30%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+}
+
+.control-down {
+  border-radius: 100% 100% 35% 35% / 100%;
+  width: 8%;
+  background: radial-gradient(ellipse at 50% 30%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.control-left {
+  border-radius: 100% 35% 35% 100% / 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 30% 50%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+}
+
+.control-right {
+  border-radius: 100% 35% 35% 100% / 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 30% 50%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.control-spacer {
+  width: 8%;
+  background-color: transparent;
+  aspect-ratio: 1 / 1;
+}
+
+.control-spacer-row {
+  height: 100%;
+  background-color: transparent;
+  aspect-ratio: 1 / 1;
+}
+
+.control-spacer-middle {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: transparent;
+  height: 8%;
 }
 
 .game-board {

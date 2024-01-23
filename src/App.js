@@ -151,6 +151,58 @@ export default function Game() {
     }
   }
 
+  function handleControlDownClick() {
+    if (!hasWon && !isSetup) {
+      const nextSquares = currentSquares.map((arr, i) => arr.slice().map((e,i2) => e));
+      if (nextSquares[numberOfRows - 1][selectedCol] === 0) {
+        for (let i = numberOfRows - 1; i > 0; i--) {
+          nextSquares[i][selectedCol] = nextSquares[i-1][selectedCol];
+        }
+        nextSquares[0][selectedCol] = 0;
+        updateIfValid(selectedRow + 1, selectedCol, nextSquares);
+      }
+    }
+  }
+
+  function handleControlUpClick() {
+    if (!hasWon && !isSetup) {
+      const nextSquares = currentSquares.map((arr, i) => arr.slice().map((e,i2) => e));
+      if (nextSquares[0][selectedCol] === 0) {
+        for (let i = 0; i < numberOfRows - 1; i++) {
+          nextSquares[i][selectedCol] = nextSquares[i+1][selectedCol];
+        }
+        nextSquares[numberOfRows-1][selectedCol] = 0;
+        updateIfValid(selectedRow - 1, selectedCol, nextSquares);
+      }
+    }
+  }
+
+  function handleControlLeftClick() {
+    if (!hasWon && !isSetup) {
+      const nextSquares = currentSquares.map((arr, i) => arr.slice().map((e,i2) => e));
+      if (nextSquares[selectedRow][0] === 0) {
+        for (let i = 0; i < numberOfColumns - 1; i++) {
+          nextSquares[selectedRow][i] = nextSquares[selectedRow][i+1];
+        }
+        nextSquares[selectedRow][numberOfColumns - 1] = 0;
+        updateIfValid(selectedRow, selectedCol - 1, nextSquares);
+      }
+    }
+  }
+
+  function handleControlRightClick() {
+    if (!hasWon && !isSetup) {
+      const nextSquares = currentSquares.map((arr, i) => arr.slice().map((e,i2) => e));
+      if (nextSquares[selectedRow][numberOfColumns - 1] === 0) {
+        for (let i = numberOfColumns - 1; i > 0; i--) {
+          nextSquares[selectedRow][i] = nextSquares[selectedRow][i-1];
+        }
+        nextSquares[selectedRow][0] = 0;
+        updateIfValid(selectedRow, selectedCol + 1, nextSquares);
+      }
+    }
+  }
+
   function updateIfValid(row, col, nextSquares) {
 
     // neighbors are only counted if adjacent (no corner neighbors counted)
@@ -265,22 +317,54 @@ export default function Game() {
   }
 
   return (
-    <div className="App">
+    <div className="App" onKeyDown={handleOnKeyDown}>
       <header className="App-header">
         <div className="App-logo"><span className = "engraved app-title">XLEAR</span></div>
         <div className="App-settings"><label className="engraved app-setting-label">Setup Mode:</label><input className="app-setting-checkbox" type="checkbox" onChange={handleSetupModeChanged} checked={isSetup}></input></div>
         <div className="App-settings"><label className="engraved app-setting-label">Rotate Earth:</label><input className="app-setting-checkbox" type="checkbox" onChange={handleRotateEarthChanged} checked={isBackgroundRotatingOn}></input></div>
       </header>
-      <div className="game" tabIndex="0" onKeyDown={handleOnKeyDown}>
+      <div className="game" tabIndex="0">
+        <div className="ocean-border">
+
+        </div>
         <div className={"game-border" + (isBackgroundRotatingOn ? " rotating" : "")}>
           
         </div>
         <div className={"dirt-border" + (isBackgroundRotatingOn ? " rotating" : "")}>
           
         </div>
-        <div className="game-board">
-            <Board isSetup={isSetup} numberOfRows={numberOfRows} numberOfColumns={numberOfColumns} squares={currentSquares} onPlace={handlePlace} onSelect={handleSelect} />
+        <div className="controls">
+          <div className="control-up" onClick={handleControlUpClick}/>
+          <div className="control-spacer"/>
+          <div className="control-spacer"/>
+          <div className="control-spacer"/>
+          <div className="control-spacer"/>
+          <div className="control-spacer"/>
+          <div className="control-spacer-middle">
+            <div className="control-left" onClick={handleControlLeftClick}/>
+            <div className="control-spacer-row"/>
+            <div className="control-spacer-row"/>
+            <div className="control-spacer-row"/>
+            <div className="control-spacer-row"/>
+            <div className="control-spacer-row"/>
+            <div className="control-spacer-row"/>
+            <div className="control-spacer-row"/>
+            <div className="control-spacer-row"/>
+            <div className="control-spacer-row"/>
+            <div className="control-spacer-row"/>
+            <div className="control-spacer-row"/>
+            <div className="control-right" onClick={handleControlRightClick}/>
           </div>
+          <div className="control-spacer"/>
+          <div className="control-spacer"/>
+          <div className="control-spacer"/>
+          <div className="control-spacer"/>
+          <div className="control-spacer"/>
+          <div className="control-down" onClick={handleControlDownClick}/>
+        </div>
+        <div className="game-board">
+          <Board isSetup={isSetup} numberOfRows={numberOfRows} numberOfColumns={numberOfColumns} squares={currentSquares} onPlace={handlePlace} onSelect={handleSelect} />
+        </div>
       </div>
       <footer className="App-footer">
         <div className={"App-settings" + (hasWon ? "" : "-hidden")}><label className="engraved app-setting-label">You Won!</label></div>
