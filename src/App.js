@@ -211,6 +211,7 @@ export default function Game() {
 
   function handleRecallClick() {
     if (storedSquares !== null) {
+      setHasWon(false);
       const temp = storedSquares.map((arr, i) => arr.slice().map((e,i2) => isSetup ? Math.abs(e) : e));
       setCurrentSquares(temp);
       setSelectedRow(selectedRow);
@@ -222,9 +223,13 @@ export default function Game() {
           setIsPlayEnabled(false);
         }
       } else if (!updateIfValid(selectedRow, selectedCol, temp, true, true)) {
-        setPlayLabel("Edit");
+        setPlayLabel("Play");
         setIsPlayEnabled(false);
         setIsSetup(true);
+      } else {
+        setPlayLabel("Edit");
+        setIsPlayEnabled(true);
+        setIsSetup(false);
       }
     }
   }
