@@ -60,6 +60,50 @@ export default function Game() {
   const [storedSquares, setStoredSquares] = useState(null);
   const [rulesShowing, setRulesShowing] = useState(false);
 
+  function populateAndPlay(squares) {
+    setHasWon(false);
+    setCurrentSquares(squares);
+    setPlayLabel("Edit");
+    setIsPlayEnabled(true);
+    setIsSetup(false);
+  }
+
+  function handleEasyClick() {
+    populateAndPlay([[0,0,0,0,0,0,0]
+                    ,[0,0,0,0,0,0,0]
+                    ,[0,2,1,1,2,2,0]
+                    ,[0,1,1,-1,2,1,0]
+                    ,[0,2,2,1,1,2,0]
+                    ,[0,0,0,0,0,0,0]
+                    ,[0,0,0,0,0,0,0]]);
+    setSelectedRow(3);
+    setSelectedCol(3);
+  }
+
+  function handleMediumClick() {
+    populateAndPlay([[0,0,0,0,0,0,0]
+                    ,[0,0,0,0,0,0,0]
+                    ,[0,0,1,2,1,0,0]
+                    ,[0,0,2,-1,2,0,0]
+                    ,[0,0,2,2,1,0,0]
+                    ,[0,0,1,1,2,0,0]
+                    ,[0,0,0,0,0,0,0]]);
+    setSelectedRow(3);
+    setSelectedCol(3);
+  }
+
+  function handleHardClick() {
+    populateAndPlay([[0,0,0,0,0,0,0]
+                    ,[0,0,0,0,0,0,0]
+                    ,[0,0,2,1,2,0,0]
+                    ,[0,0,1,-2,1,0,0]
+                    ,[0,0,2,1,2,0,0]
+                    ,[0,0,0,0,0,0,0]
+                    ,[0,0,0,0,0,0,0]]);
+    setSelectedRow(3);
+    setSelectedCol(3);
+  }
+
   function handleRotateEarthChanged() {
     if (!isBackgroundRotatingOn) {
       setRotateLabel("Stop Rotating Land");
@@ -527,6 +571,11 @@ export default function Game() {
               </div>
             </div>
             <div className={"App-footer" + (rulesShowing ? " blur" : "")}>
+              <div className="App-settings-buttons">
+                <div className="App-setting"><div className="App-setting-button-store" onClick={handleEasyClick}><label className="App-setting-button-label app-setting-label">Easy</label></div></div>
+                <div className="App-setting"><div className="App-setting-button-recall" onClick={handleMediumClick}><label className="App-setting-button-label app-setting-label">Medium</label></div></div>
+                <div className="App-setting"><div className="App-setting-button-clear" onClick={handleHardClick}><label className="App-setting-button-label app-setting-label">Hard</label></div></div>
+              </div>
               <div className="App-settings-buttons">
                 <div className="App-setting"><div className={"App-setting-button-play" + (isPlayEnabled ? "" : "-disabled")} onClick={handleSetupModeChanged}><label className="App-setting-button-label app-setting-label">{playLabel}</label></div></div>
                 <div className="App-setting"><div className="App-setting-button" onClick={handleResetClick}><label className="App-setting-button-label app-setting-label">Empty</label></div></div>
