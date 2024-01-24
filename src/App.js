@@ -533,7 +533,7 @@ export default function Game() {
                 <div className="App-setting"><div className="App-setting-button-clear" onClick={handleClearClick}><label className="App-setting-button-label app-setting-label">Clear</label></div></div>
               </div>
               <div className="App-settings-buttons">
-                <div className="App-setting"><div className="App-setting-button-rotate" onClick={handleRotateEarthChanged}><label className="App-setting-button-label app-setting-label">{rotateLabel}</label></div></div>
+                <div className="App-setting"><div className="App-setting-button-rotate" onClick={handleRotateEarthChanged}><label className="App-setting-button-label">{rotateLabel}</label></div></div>
               </div>
             </div>
             <footer className="App-footer-copyright">
