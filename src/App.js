@@ -203,19 +203,18 @@ export default function Game() {
   }
 
   function handleStoreClick() {
-    const temp = currentSquares.map((arr, i) => arr.slice().map((e,i2) => e));
-    setStoredSquares(temp);
+    if (!currentSquares.some(r => r.includes(4))) {
+      const temp = currentSquares.map((arr, i) => arr.slice().map((e,i2) => e));
+      setStoredSquares(temp);
+    }
   }
 
   function handleRecallClick() {
-    if (storedSquares) {
+    if (storedSquares !== null) {
       const temp = storedSquares.map((arr, i) => arr.slice().map((e,i2) => isSetup ? Math.abs(e) : e));
       setCurrentSquares(temp);
       setSelectedRow(selectedRow);
       setSelectedCol(selectedCol);
-      if (hasWon) {
-        setHasWon(!hasWon);
-      }
       if (isSetup) {
         if (updateIfValid(selectedRow, selectedCol, temp, true, true)) {
           setIsPlayEnabled(true);
@@ -223,6 +222,7 @@ export default function Game() {
           setIsPlayEnabled(false);
         }
       } else if (!updateIfValid(selectedRow, selectedCol, temp, true, true)) {
+        setPlayLabel("Edit");
         setIsPlayEnabled(false);
         setIsSetup(true);
       }
