@@ -12,6 +12,62 @@ div {
   text-align: center;
 }
 
+.App-header-rules {
+  background: #333333dd;
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  color: white;
+  box-shadow: 0px 60px 60px rgba(0,0,0,.8);
+}
+
+.App-header-rules-hidden {
+  display: none;
+}
+
+.toast-rules {
+  position: relative;
+  min-height: 70vh;
+  width: 100%;
+}
+
+.closeRules {
+  cursor: pointer;
+  font-weight: bolder;
+  position: fixed;
+  top: 15vh;
+  right: 6vw;
+  font-family: Future;
+  font-size: 10vw;
+  color: white;
+  z-index: 20;
+  margin: 0vh 1vh 0vh 0vh;
+}
+
+.closeRules-hidden {
+  display: none;
+}
+
+.rules {
+  position: absolute;
+  background-color: #333333c4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
 .App-logo {
   pointer-events: none;
   display: inline-block;
@@ -460,6 +516,14 @@ ul {
   cursor: pointer;
 }
 
+.App-setting-button-rules {
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, #ddaa00 0%, #aa6600 70%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
+}
+
 .App-setting-button-play-disabled {
   filter: blur(0.5vh);
   pointer-events: none;
@@ -528,7 +592,8 @@ ul {
 }
 
 .sq0-rules {
-  margin-right: 2vh;
+  margin-right: 1vh;
+  margin-left: 1vh;
   vertical-align: middle;
   border-radius: 30% 10% 20% 60% / 80% 20% 30% 20%;;
   border-color: #aaa;
@@ -539,7 +604,8 @@ ul {
 }
 
 .sq1-rules {
-  margin-right: 2vh;
+  margin-right: 1vh;
+  margin-left: 1vh;
   border-radius: 80% 20% 30% 20% / 30% 10% 20% 60%;
   border-style: solid;
   border-color: #222b;
@@ -550,7 +616,8 @@ ul {
 }
 
 .sq2-rules {
-  margin-right: 2vh;
+  margin-right: 1vh;
+  margin-left: 1vh;
   border-radius: 30% 10% 20% 60% / 80% 20% 30% 20%;
   border-style: solid;
   border-color: #0044eebb;
@@ -561,7 +628,8 @@ ul {
 }
 
 .sq-1-rules {
-  margin-right: 2vh;
+  margin-right: 1vh;
+  margin-left: 1vh;
   border-radius: 80% 20% 30% 20% / 30% 10% 20% 60%;
   border-style: solid;
   border-color: white;
@@ -572,7 +640,8 @@ ul {
 }
 
 .sq-2-rules {
-  margin-right: 2vh;
+  margin-right: 1vh;
+  margin-left: 1vh;
   border-radius: 30% 10% 20% 60% / 80% 20% 30% 20%;
   border-style: solid;
   border-color: white;
@@ -583,7 +652,8 @@ ul {
 }
 
 .sq4-rules {
-  margin-right: 2vh;
+  margin-right: 1vh;
+  margin-left: 1vh;
   width: 10vh;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
@@ -595,7 +665,8 @@ ul {
 }
 
 .control-up-rules {
-  margin-right: 2vh;
+  margin-right: 1vh;
+  margin-left: 1vh;
   border-radius: 100% 100% 35% 35% / 100%;
   width: 8vh;
   background: radial-gradient(ellipse at 50% 30%, white 0%, #bbbd 90%);
@@ -604,7 +675,8 @@ ul {
 }
 
 .control-down-rules {
-  margin-right: 2vh;
+  margin-right: 1vh;
+  margin-left: 1vh;
   border-radius: 100% 100% 35% 35% / 100%;
   width: 8vh;
   background: radial-gradient(ellipse at 50% 30%, white 0%, #bbbd 90%);
@@ -614,7 +686,8 @@ ul {
 }
 
 .control-left-rules {
-  margin-right: 2vh;
+  margin-right: 1vh;
+  margin-left: 1vh;
   border-radius: 100% 35% 35% 100% / 100%;
   width: 8vh;
   background: radial-gradient(ellipse at 30% 50%, white 0%, #bbbd 90%);
@@ -623,7 +696,8 @@ ul {
 }
 
 .control-right-rules {
-  margin-right: 2vh;
+  margin-right: 1vh;
+  margin-left: 1vh;
   border-radius: 100% 35% 35% 100% / 100%;
   width: 8vh;
   background: radial-gradient(ellipse at 30% 50%, white 0%, #bbbd 90%);
