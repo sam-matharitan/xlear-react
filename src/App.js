@@ -72,10 +72,14 @@ export default function Game() {
     const nextSquares = currentSquares.map((arr, i) => arr.slice().map((e,i2) => Math.abs(e)));
     if (!isSetup) {
       setPlayLabel("Play");
+      setSelectedRow(null);
+      setSelectedCol(null);
+      setCurrentSquares(nextSquares);
+      setIsSetup(true);
     } else if (isPlayEnabled && updateIfValid(selectedRow, selectedCol, nextSquares, true)) {
       setPlayLabel("Edit");
       setCurrentSquares(nextSquares);
-      setIsSetup(!isSetup);
+      setIsSetup(false);
     } else {
       setIsSetup(true);
       setIsPlayEnabled(false);
