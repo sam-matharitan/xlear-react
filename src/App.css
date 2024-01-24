@@ -2,6 +2,10 @@ div {
   outline: none !important;
 }
 
+.blur {
+  filter: blur(4px);
+}
+
 .copyright {
   margin-top: 10vh;
   font-size: 2vh;

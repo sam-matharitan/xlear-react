@@ -473,10 +473,10 @@ export default function Game() {
           </div>
         </div>
         <div className={"closeRules" + (rulesShowing ? "" : "-hidden")} onClick={handleRulesClick}>×</div>
-        <header className="App-header">
+        <header className={"App-header" + (rulesShowing ? " blur" : "")}>
           <div className="App-logo"><span className = "engraved app-title">XLEAR</span></div>
         </header>
-        <div className="game" tabIndex="0">
+        <div className={"game" + (rulesShowing ? " blur" : "")} tabIndex="0">
           <div className="ocean-border">
 
           </div>
@@ -519,7 +519,7 @@ export default function Game() {
             <Board isSetup={isSetup} numberOfRows={numberOfRows} numberOfColumns={numberOfColumns} squares={currentSquares} onPlace={handlePlace} onSelect={handleSelect} />
           </div>
         </div>
-        <footer className="App-footer">
+        <footer className={"App-footer" + (rulesShowing ? " blur" : "")}>
           <div className="App-settings-buttons">
             <div className="App-setting"><div className={"App-setting-button-play" + (isPlayEnabled ? "" : "-disabled")} onClick={handleSetupModeChanged}><label className="App-setting-button-label app-setting-label">{playLabel}</label></div></div>
             <div className="App-setting"><div className="App-setting-button" onClick={handleResetClick}><label className="App-setting-button-label app-setting-label">Empty</label></div></div>
@@ -535,8 +535,8 @@ export default function Game() {
           <div className="App-settings-buttons">
             <div className="App-setting"><div className="App-setting-button-rotate" onClick={handleRotateEarthChanged}><label className="App-setting-button-label app-setting-label">{rotateLabel}</label></div></div>
           </div>
-          <span className="copyright">© 2024, The Matharitan Group, LLC</span>
         </footer>
+        <span className="copyright">© 2024, The Matharitan Group, LLC</span>
       </div>
     </>
   );
