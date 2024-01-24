@@ -6,23 +6,48 @@ div {
   filter: blur(4px);
 }
 
-.copyright {
-  margin-top: 10vh;
-  font-size: 2vh;
+.App {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  text-align: center;
+  width: 100%;
+  
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.App-inner {
+  max-width: 30em;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.App-content {
+  position: absolute;
+  background-color: #333333c4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
   width: 100%;
 }
 
-.App {
-  text-align: center;
-}
-
 .App-header-rules {
-  background: #333333dd;
+  background: #333333aa;
   z-index: 10;
   position: fixed;
   top: 50%;
   left: 50%;
   width: 90%;
+  max-width: 30em;
   transform: translate(-50%, -50%);
   overflow: auto;
   display: flex;
@@ -48,13 +73,12 @@ div {
   cursor: pointer;
   font-weight: bolder;
   position: fixed;
-  top: 15vh;
-  right: 6vw;
+  top: 0;
+  right: 0.25em;
   font-family: Future;
-  font-size: 10vw;
+  font-size: 3em;
   color: white;
   z-index: 20;
-  margin: 0vh 1vh 0vh 0vh;
 }
 
 .closeRules-hidden {
@@ -68,7 +92,6 @@ div {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
@@ -76,6 +99,7 @@ div {
   pointer-events: none;
   display: inline-block;
   width: 70%;
+  height: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -115,16 +139,17 @@ div {
     animation: shimmer 1.5s infinite linear;
   }
 }
-/*aaeeff*/
+
 .App-header {
   background-color: #333333c4;
-  min-height: 5vh;
+  min-height: 5em;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: white;
   margin-top: 3%;
+  width: 100%;
 }
 
 .game {
@@ -246,15 +271,28 @@ div {
 
 .App-footer {
   background-color: #333333c4;
-  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
-  margin-bottom: 2vh;
   margin-top: 5vh;
+}
+
+.App-footer-copyright {
+  background-color: #333333c4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.App-setting-label-copyright {
+  color: black;
+  font-size: 0.7em;
 }
 
 @keyframes game-border-spin {
@@ -421,7 +459,7 @@ ul {
 }
 
 .app-title {
-  font-size: 20vw;
+  font-size: 3em;
 }
 
 .App-setting {
@@ -439,31 +477,32 @@ ul {
 }
 
 .app-setting-title {
-  margin-top: 5vh;
-  margin-left: 5vh;
-  margin-right: 5vh;
-  font-size: 10vw;
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  font-size: 3em;
 }
 
 .app-setting-subtitle {
   font-family: Future;
-  margin-top: 3vh;
-  margin-left: 5vh;
-  margin-right: 5vh;
-  font-size: 7vw;
+  margin-top: 0.5em;
+  margin-left: 1em;
+  margin-right: 1em;
+  font-size: 2em;
 }
 
 .app-setting-desc {
   color: #ddd;
   font-family: Future;
-  margin-top: 3vh;
-  margin-left: 5vh;
-  margin-right: 5vh;
-  font-size: 6vw;
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
 }
 
 .App-settings-buttons {
-  margin-top: 2vh;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -471,7 +510,7 @@ ul {
 }
 
 .App-settings-buttons .App-setting {
-  margin-left: 4vw;
+  margin: 0.5em;
 }
 
 .App-setting-hidden {
@@ -480,7 +519,7 @@ ul {
 
 .app-setting-label {
   font-family: Future;
-  font-size: 8vw;
+  font-size: 2em;
   display: table-cell;
   vertical-align: middle;
 }
