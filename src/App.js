@@ -46,12 +46,12 @@ export default function Game() {
   const [isSetup, setIsSetup] = useState(false);
   const [isPlayEnabled, setIsPlayEnabled] = useState(true);
   const [currentSquares, setCurrentSquares] = useState([[0,0,0,0,0,0,0]
-                                                       ,[0,0,0,0,0,0,0]
-                                                       ,[0,0,2,1,2,0,0]
-                                                       ,[0,0,1,-2,1,0,0]
-                                                       ,[0,0,2,1,2,0,0]
-                                                       ,[0,0,0,0,0,0,0]
-                                                       ,[0,0,0,0,0,0,0]]);
+                                                        ,[0,0,0,0,0,0,0]
+                                                        ,[0,2,1,1,2,2,0]
+                                                        ,[0,1,1,-1,2,1,0]
+                                                        ,[0,2,2,1,1,2,0]
+                                                        ,[0,0,0,0,0,0,0]
+                                                        ,[0,0,0,0,0,0,0]]);
   const [selectedRow, setSelectedRow] = useState(null);
   const [selectedCol, setSelectedCol] = useState(null);
   const [hasWon, setHasWon] = useState(false);
